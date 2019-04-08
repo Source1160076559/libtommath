@@ -26,6 +26,35 @@ static unsigned long ulabs(long x)
    return x > 0 ? (unsigned long)x : -(unsigned long)x;
 }
 
+static int test_feature_detection(void)
+{
+#define BN_TEST_FEATURE1_C
+   if (!MP_HAS(TEST_FEATURE1)) {
+      return EXIT_FAILURE;
+   }
+
+#define BN_TEST_FEATURE2_C 1
+   if (MP_HAS(TEST_FEATURE2)) {
+      return EXIT_FAILURE;
+   }
+
+#define BN_TEST_FEATURE3_C 0
+   if (MP_HAS(TEST_FEATURE3)) {
+      return EXIT_FAILURE;
+   }
+
+#define BN_TEST_FEATURE4_C something
+   if (MP_HAS(TEST_FEATURE4)) {
+      return EXIT_FAILURE;
+   }
+
+   if (MP_HAS(TEST_FEATURE5)) {
+      return EXIT_FAILURE;
+   }
+
+   return EXIT_SUCCESS;
+}
+
 static int test_trivial_stuff(void)
 {
    mp_int a, b, c, d;
@@ -1848,6 +1877,7 @@ int unit_tests(int argc, char **argv)
       int (*fn)(void);
    } test[] = {
 #define T(n) { #n, test_##n }
+      T(feature_detection),
       T(trivial_stuff),
       T(mp_cnt_lsb),
       T(mp_complement),
