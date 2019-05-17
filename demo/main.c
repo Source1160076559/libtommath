@@ -39,7 +39,7 @@ int main(int argc, char **argv)
    printf("Digit size 64 Bit \n");
 #endif
    printf("Size of mp_digit: %u\n", (unsigned int)sizeof(mp_digit));
-   printf("Size of mp_word: %u\n", (unsigned int)sizeof(mp_word));
+   printf("Size of mp_word: %u\n", (unsigned int)sizeof(private_mp_word));
    printf("MP_DIGIT_BIT: %d\n", MP_DIGIT_BIT);
    printf("MP_PREC: %d\n", MP_PREC);
 
